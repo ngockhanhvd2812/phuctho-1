@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Kế hoạch Phát triển KT-XH xã Phúc Thọ 2025-2030</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Subtle Earth Tones -->
+    <!-- Application Structure Plan: The application is designed as a single-page interactive dashboard. This structure reorganizes the dense report content into a user-centric, thematic flow, starting from a high-level overview, then drilling down into specific data comparisons, strategic pillars, concrete solutions, and finally, the implementation roadmap. This non-linear, interactive approach is chosen to enhance comprehension and facilitate exploration, allowing leaders to quickly access the information most relevant to them, rather than reading sequentially. -->
+    <!-- Visualization & Content Choices: 
+        - Economic Targets (Goal: Compare): An interactive bar chart (Chart.js) is used to visually highlight the discrepancy between the commune's ambitious growth targets and its more modest income goals compared to Hanoi's reality. This makes the report's key critique immediately apparent. Interaction: Hover tooltips.
+        - Strategic Breakthroughs (Goal: Organize/Inform): Interactive tabs (HTML/CSS/JS) present the four breakthroughs. This organizes complex recommendations into digestible chunks, allowing users to focus on one strategic area at a time. Interaction: Click to reveal content.
+        - Key Solutions (Goal: Organize/Explore): A filterable grid of cards presents key recommendations. This allows users to explore proposed solutions based on their area of interest (e.g., Economy, Culture), making a long list of tasks manageable. Interaction: Filter buttons.
+        - Implementation Plan (Goal: Organize/Inform): An interactive, sortable table for the responsibility matrix and a clear timeline visual provide a clear view of "who does what by when," turning recommendations into an actionable plan. Interaction: Table sorting.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fdfcfb;
+            color: #3a3a3a;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4a5568;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .tab-btn.active {
+            border-color: #38a169;
+            background-color: #f0fff4;
+            color: #2f855a;
+            font-weight: 600;
+        }
+        .filter-btn.active {
+            background-color: #2c5282;
+            color: white;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-lg font-bold text-gray-700">Kế hoạch Phúc Thọ 2025-2030</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#tong-quan" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Tổng quan</a>
+                        <a href="#muc-tieu" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Mục tiêu & Chỉ số</a>
+                        <a href="#dot-pha" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Đột phá Chiến lược</a>
+                        <a href="#giai-phap" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Nhiệm vụ & Giải pháp</a>
+                        <a href="#lo-trinh" class="nav-link text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Lộ trình & Phân công</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="tong-quan" class="py-16 sm:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Tầm nhìn Phát triển Kinh tế - Xã hội xã Phúc Thọ</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-lg leading-8 text-gray-600">Định hướng tổng thể giai đoạn 2025-2030, tập trung vào các nhiệm vụ trọng tâm và khâu đột phá chiến lược để tạo ra sự phát triển toàn diện, bền vững.</p>
+                
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-stone-100/50 p-6 rounded-lg border border-stone-200">
+                        <h3 class="text-xl font-semibold text-gray-800">🎯 6 Nhiệm vụ trọng tâm</h3>
+                        <p class="mt-2 text-gray-600">Các lĩnh vực ưu tiên hàng đầu, bao trùm toàn bộ các mặt kinh tế, xã hội, an ninh quốc phòng, và xây dựng hệ thống chính trị vững mạnh.</p>
+                    </div>
+                    <div class="bg-stone-100/50 p-6 rounded-lg border border-stone-200">
+                        <h3 class="text-xl font-semibold text-gray-800">🚀 4 Khâu đột phá chiến lược</h3>
+                        <ul class="mt-3 space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="mr-2 text-green-600">✓</span> Ứng dụng KHCN và Chuyển đổi số.</li>
+                            <li class="flex items-start"><span class="mr-2 text-green-600">✓</span> Thu hút đầu tư, phát triển hạ tầng đồng bộ.</li>
+                            <li class="flex items-start"><span class="mr-2 text-green-600">✓</span> Phát triển nguồn nhân lực chất lượng cao.</li>
+                            <li class="flex items-start"><span class="mr-2 text-green-600">✓</span> Phát triển công nghiệp văn hóa gắn với du lịch.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="muc-tieu" class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Phân tích Mục tiêu Kinh tế Chủ yếu</h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-600">
+                        Báo cáo tham mưu đã chỉ ra sự cần thiết phải xem xét lại tính khả thi và nhất quán của các chỉ tiêu kinh tế. Biểu đồ dưới đây trực quan hóa sự so sánh giữa mục tiêu của Phúc Thọ và thực trạng của TP. Hà Nội, làm nổi bật các điểm cần lưu ý.
+                    </p>
+                </div>
+
+                <div class="mt-12">
+                    <div class="chart-container">
+                        <canvas id="economicChart"></canvas>
+                    </div>
+                    <div class="mt-6 text-center text-sm text-gray-500 italic">
+                        Di chuột qua các cột để xem chi tiết.
+                    </div>
+                </div>
+
+                <div id="analysis-content" class="mt-8 max-w-4xl mx-auto bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                    <h4 class="font-bold text-yellow-800">Phân tích & Đánh giá từ Báo cáo</h4>
+                    <p class="mt-2 text-yellow-700">
+                        <strong class="font-semibold">Tốc độ tăng trưởng (10.5-11%):</strong> Rất tham vọng, cao gấp 1.6-1.7 lần mức tăng trưởng chung của Thủ đô. Cần có các dự án động lực cực lớn để hiện thực hóa.
+                        <br>
+                        <strong class="font-semibold">Thu nhập bình quân (145 triệu/năm):</strong> Thiếu nhất quán. Mục tiêu đến 2030 lại thấp hơn mức thực tế của Hà Nội năm 2024 (163.5 triệu). Điều này cho thấy mô hình tăng trưởng có thể chưa mang lại lợi ích tương xứng cho người dân. Cần xem xét, điều chỉnh lại cho phù hợp và tham vọng hơn.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="dot-pha" class="py-16 sm:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Khám phá 4 Khâu đột phá Chiến lược</h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-600">
+                        Đây là bốn đòn bẩy chính để tạo ra sự thay đổi mang tính bước ngoặt. Mỗi lĩnh vực đều có những khuyến nghị cụ thể để biến định hướng thành hành động thực tiễn. Chọn một lĩnh vực để xem chi tiết các giải pháp được đề xuất.
+                    </p>
+                </div>
+
+                <div class="mt-12 max-w-5xl mx-auto">
+                    <div class="mb-6 flex flex-wrap justify-center gap-2 sm:gap-4">
+                        <button data-tab="tab1" class="tab-btn active text-sm sm:text-base px-4 py-2 border-b-2 font-medium rounded-t-lg">🚀 Chuyển đổi số</button>
+                        <button data-tab="tab2" class="tab-btn text-sm sm:text-base px-4 py-2 border-b-2 font-medium rounded-t-lg">🏗️ Hạ tầng & Đầu tư</button>
+                        <button data-tab="tab3" class="tab-btn text-sm sm:text-base px-4 py-2 border-b-2 font-medium rounded-t-lg">👩‍🎓 Nguồn nhân lực</button>
+                        <button data-tab="tab4" class="tab-btn text-sm sm:text-base px-4 py-2 border-b-2 font-medium rounded-t-lg">🎭 Văn hóa & Du lịch</button>
+                    </div>
+
+                    <div id="tab-content" class="bg-stone-50 p-6 sm:p-8 rounded-lg border border-stone-200 min-h-[300px]">
+                        <div id="tab1" class="tab-pane active">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Xây dựng "Xã thông minh" thực chất</h3>
+                            <p class="text-gray-600 mb-4">Tránh hình thức, tập trung vào giải quyết vấn đề thực tế của người dân và doanh nghiệp theo lộ trình 2 giai đoạn:</p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Giai đoạn 1 (2026-2027): Nền tảng & Thiết thực</h4>
+                                    <ul class="mt-2 list-disc list-inside space-y-1 text-gray-600">
+                                        <li>100% dịch vụ công trực tuyến toàn trình.</li>
+                                        <li>Triển khai truyền thanh thông minh (IP).</li>
+                                        <li>Sàn TMĐT cho sản phẩm OCOP, làng nghề.</li>
+                                        <li>Phổ cập thanh toán không dùng tiền mặt.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Giai đoạn 2 (2028-2030): Nâng cao & Tích hợp</h4>
+                                    <ul class="mt-2 list-disc list-inside space-y-1 text-gray-600">
+                                        <li>Ứng dụng di động "Công dân Phúc Thọ".</li>
+                                        <li>Xây dựng CSDL chuyên ngành (đất đai, dân cư...).</li>
+                                        <li>Quản lý, điều hành dựa trên dữ liệu lớn.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-pane hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Thu hút đầu tư và phát triển hạ tầng đồng bộ</h3>
+                            <p class="text-gray-600 mb-4">Giải quyết các "điểm nghẽn" về vốn và mặt bằng để tạo ra các trục phát triển mới.</p>
+                             <ul class="mt-2 list-disc list-inside space-y-2 text-gray-600">
+                                <li><strong class="font-semibold">Thành lập Tổ công tác Xúc tiến Đầu tư:</strong> Xây dựng danh mục dự án kêu gọi đầu tư chi tiết, làm đầu mối hỗ trợ doanh nghiệp.</li>
+                                <li><strong class="font-semibold">Chủ động tạo quỹ đất sạch:</strong> Đẩy nhanh giải phóng mặt bằng tại các vị trí quy hoạch Cụm công nghiệp, Logistics.</li>
+                                <li><strong class="font-semibold">Huy động vốn theo mô hình PPP (Đối tác Công - Tư):</strong> Nghiên cứu áp dụng các hợp đồng BOT, BTO cho các dự án giao thông trọng điểm.</li>
+                            </ul>
+                        </div>
+                        <div id="tab3" class="tab-pane hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Phát triển nguồn nhân lực chất lượng cao</h3>
+                            <p class="text-gray-600 mb-4">Nguồn nhân lực là yếu tố quyết định để hấp thụ công nghệ mới và thu hút các dự án đầu tư giá trị cao.</p>
+                             <ul class="mt-2 list-disc list-inside space-y-2 text-gray-600">
+                                <li><strong class="font-semibold">Tích hợp quy hoạch:</strong> Quy hoạch các trung tâm giáo dục nghề nghiệp gắn liền với các trục giao thông, khu công nghiệp mới.</li>
+                                <li><strong class="font-semibold">Đào tạo theo nhu cầu:</strong> Xây dựng chương trình đào tạo kỹ năng bám sát nhu cầu của các doanh nghiệp, đặc biệt trong lĩnh vực công nghệ cao và du lịch dịch vụ.</li>
+                                <li><strong class="font-semibold">Nâng cao chất lượng đội ngũ cán bộ:</strong> Xây dựng kế hoạch đào tạo, bồi dưỡng cán bộ, công chức để đáp ứng yêu cầu quản lý trong giai đoạn mới.</li>
+                            </ul>
+                        </div>
+                        <div id="tab4" class="tab-pane hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Phát triển Công nghiệp văn hóa gắn với Du lịch</h3>
+                            <p class="text-gray-600 mb-4">Xây dựng một "Hệ sinh thái du lịch" hoàn chỉnh thay vì khai thác các điểm đến riêng lẻ.</p>
+                             <ul class="mt-2 list-disc list-inside space-y-2 text-gray-600">
+                                <li><strong class="font-semibold">Xây dựng Đề án tổng thể:</strong> Kết nối các điểm đến (Đình Tường Phiêu, làng nghề Tích Giang) thành chuỗi giá trị du lịch.</li>
+                                <li><strong class="font-semibold">Phát triển sản phẩm trải nghiệm:</strong> Tour "Một ngày làm nghệ nhân", "Ẩm thực đồng quê", thay vì chỉ tham quan.</li>
+                                <li><strong class="font-semibold">Phát triển du lịch cộng đồng (Homestay):</strong> Hỗ trợ người dân phát triển mô hình lưu trú tại nhà.</li>
+                                <li><strong class="font-semibold">Tích hợp OCOP và Chuyển đổi số:</strong> Gắn sản phẩm OCOP vào chuỗi du lịch, quảng bá bằng công nghệ (VR/AR, cổng thông tin thông minh).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="giai-phap" class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Các Nhiệm vụ và Giải pháp Trọng yếu</h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-600">
+                        Báo cáo đã đề xuất hàng loạt giải pháp cụ thể để hiện thực hóa các mục tiêu. Sử dụng bộ lọc để khám phá các nhiệm vụ theo từng lĩnh vực chuyên môn.
+                    </p>
+                </div>
+
+                <div class="mt-10 flex flex-wrap justify-center gap-2 mb-8">
+                    <button class="filter-btn active px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium" data-filter="all">Tất cả</button>
+                    <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium" data-filter="kinhte">Kinh tế</button>
+                    <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium" data-filter="vanhoa">Văn hóa - Xã hội</button>
+                    <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium" data-filter="quyhoach">Quy hoạch & Môi trường</button>
+                    <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium" data-filter="thuchien">Tổ chức thực hiện</button>
+                </div>
+
+                <div id="solutions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards will be injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="lo-trinh" class="py-16 sm:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Lộ trình và Phân công Trách nhiệm</h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-600">
+                        Để đảm bảo tính khả thi, báo cáo đề xuất một ma trận phân công trách nhiệm rõ ràng với các mốc thời gian cụ thể cho từng nhiệm vụ chiến lược.
+                    </p>
+                </div>
+                
+                <div class="mt-12 overflow-x-auto">
+                    <table id="responsibility-matrix" class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="id">TT</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="task">Nhiệm vụ cụ thể</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="lead">Cơ quan chủ trì</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-sort="partners">Cơ quan phối hợp</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="deadline">Thời gian hoàn thành</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Rows will be injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm">
+            <p>Bảng điều khiển tương tác dựa trên Báo cáo Góp ý, tham mưu hoàn thiện Kế hoạch KT-XH xã Phúc Thọ.</p>
+            <p class="mt-1 text-gray-400">Phát triển bởi chuyên gia phân tích - Phòng Kinh tế.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const economicData = {
+        labels: ['Tốc độ tăng trưởng (%/năm)', 'Thu nhập BQĐN (Triệu đồng/năm)'],
+        datasets: [
+            {
+                label: 'Mục tiêu xã Phúc Thọ (đến 2030)',
+                data: [10.75, 145],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Thực tế TP. Hà Nội (2024)',
+                data: [6.5, 163.5],
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const ctx = document.getElementById('economicChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: economicData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'So sánh chỉ tiêu kinh tế Phúc Thọ và thực trạng Hà Nội',
+                    font: { size: 16 }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                if (context.dataIndex === 0) {
+                                    label += context.parsed.y.toFixed(2) + '%';
+                                } else {
+                                    label += context.parsed.y.toFixed(1) + ' triệu đồng';
+                                }
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Giá trị'
+                    }
+                }
+            }
+        }
+    });
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const targetTab = button.getAttribute('data-tab');
+            tabPanes.forEach(pane => {
+                if (pane.id === targetTab) {
+                    pane.classList.remove('hidden');
+                    pane.classList.add('active');
+                } else {
+                    pane.classList.add('hidden');
+                    pane.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    const solutionsData = [
+        { category: 'kinhte', title: 'Thành lập Tổ Xúc tiến Đầu tư', description: 'Xây dựng danh mục dự án kêu gọi đầu tư, làm đầu mối hỗ trợ doanh nghiệp, quảng bá tiềm năng của xã.' },
+        { category: 'kinhte', title: 'Chủ động tạo quỹ đất sạch', description: 'Đẩy nhanh GPMB tại các vị trí quy hoạch Cụm công nghiệp, Logistics để sẵn sàng đón nhà đầu tư.' },
+        { category: 'kinhte', title: 'Huy động vốn PPP cho hạ tầng', description: 'Nghiên cứu áp dụng mô hình BOT, BTO cho các dự án giao thông trọng điểm, giảm gánh nặng ngân sách.' },
+        { category: 'kinhte', title: 'Bổ sung chỉ tiêu chất lượng tăng trưởng', description: 'Đo lường tỷ lệ lao động có việc làm, tăng trưởng thu nhập hộ gia đình, đóng góp của TFP.' },
+        { category: 'vanhoa', title: 'Xây dựng Đề án tổng thể Du lịch', description: 'Phát triển hệ sinh thái du lịch kết nối di sản, nông nghiệp, làng nghề. Tích hợp OCOP và chuyển đổi số.' },
+        { category: 'vanhoa', title: 'Rà soát 19 tiêu chí NTM nâng cao', description: 'Xây dựng bảng đối chiếu chi tiết với bộ tiêu chí quốc gia (QĐ 318/QĐ-TTg) để có lộ trình thực hiện bài bản.' },
+        { category: 'vanhoa', title: 'Phát triển sản phẩm du lịch trải nghiệm', description: 'Tổ chức các tour "Một ngày làm nghệ nhân", "Ẩm thực đồng quê", phát triển homestay để giữ chân du khách.' },
+        { category: 'quyhoach', title: 'Đồng bộ hóa quy hoạch cấp xã', description: 'Cập nhật khẩn trương quy hoạch của xã để thống nhất với các quy hoạch mới của Thủ đô, định hướng đô thị sinh thái.' },
+        { category: 'quyhoach', title: 'Số hóa dữ liệu đất đai', description: 'Xây dựng hồ sơ địa chính, CSDL đất đai để quản lý minh bạch, phục vụ tốt cho quy hoạch và GPMB.' },
+        { category: 'quyhoach', title: 'Quy hoạch Cụm công nghiệp làng nghề', description: 'Xây dựng đề án di dời các hộ sản xuất gây ô nhiễm vào khu tập trung có hạ tầng xử lý môi trường đồng bộ.' },
+        { category: 'thuchien', title: 'Xây dựng Bộ chỉ số KPIs', description: 'Thiết lập bộ chỉ số đánh giá hiệu quả (KPIs) khoa học, minh bạch để giám sát việc thực hiện kế hoạch.' },
+        { category: 'thuchien', title: 'Thành lập các Ban Chỉ đạo chuyên đề', description: 'Thành lập Ban chỉ đạo cho các chương trình lớn (NTM nâng cao, Du lịch, CĐS) để tăng cường điều phối.' },
+        { category: 'thuchien', title: 'Chi tiết hóa phân công nhiệm vụ', description: 'Xác định rõ đơn vị chủ trì và các đơn vị phối hợp cho từng nhiệm vụ liên ngành để tránh chồng chéo, đùn đẩy.' },
+    ];
+
+    const solutionsGrid = document.getElementById('solutions-grid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function renderSolutions(filter) {
+        solutionsGrid.innerHTML = '';
+        const filteredData = (filter === 'all') ? solutionsData : solutionsData.filter(item => item.category === filter);
+        
+        filteredData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card bg-white p-6 rounded-lg border border-gray-200 shadow-sm';
+            card.innerHTML = `
+                <h4 class="font-bold text-lg text-gray-800">${item.title}</h4>
+                <p class="mt-2 text-gray-600 text-sm">${item.description}</p>
+            `;
+            solutionsGrid.appendChild(card);
+        });
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            renderSolutions(button.getAttribute('data-filter'));
+        });
+    });
+
+    renderSolutions('all');
+
+    const responsibilityData = [
+        { id: 1, task: 'Rà soát, điều chỉnh các chỉ tiêu kinh tế, bổ sung chỉ tiêu chất lượng tăng trưởng.', lead: 'Phòng Kinh tế', partners: 'Đội Thống kê, Đội thuế, VP HĐND&UBND', deadline: 'Quý IV/2025' },
+        { id: 2, task: 'Xây dựng Đề án tổng thể phát triển hệ sinh thái du lịch Phúc Thọ.', lead: 'Phòng Văn hóa - Xã hội', partners: 'Phòng Kinh tế, Ban QLDA, HTX', deadline: 'Quý II/2026' },
+        { id: 3, task: 'Xây dựng Kế hoạch Chuyển đổi số xã Phúc Thọ giai đoạn 2026-2030.', lead: 'Phòng Văn hóa - Xã hội', partners: 'Tất cả các phòng, ban, đơn vị', deadline: 'Quý I/2026' },
+        { id: 4, task: 'Xây dựng Danh mục các dự án kêu gọi đầu tư chi tiết cho 4 vùng kinh tế.', lead: 'Phòng Kinh tế', partners: 'Ban QLDA, Phòng VH-XH', deadline: 'Quý I/2026' },
+        { id: 5, task: 'Xây dựng và ban hành Bộ chỉ số đánh giá hiệu quả (KPIs).', lead: 'Văn phòng HĐND&UBND', partners: 'Phòng Kinh tế, Phòng VH-XH', deadline: 'Quý I/2026' },
+    ];
+
+    const tableBody = document.querySelector('#responsibility-matrix tbody');
+    let sortDirection = {};
+
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${row.id}</td>
+                <td class="px-6 py-4 whitespace-normal text-sm text-gray-600">${row.task}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-semibold">${row.lead}</td>
+                <td class="px-6 py-4 whitespace-normal text-sm text-gray-600">${row.partners}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-medium">${row.deadline}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    document.querySelectorAll('#responsibility-matrix th[data-sort]').forEach(header => {
+        header.addEventListener('click', () => {
+            const column = header.getAttribute('data-sort');
+            const direction = sortDirection[column] === 'asc' ? 'desc' : 'asc';
+            sortDirection = { [column]: direction };
+
+            const sortedData = [...responsibilityData].sort((a, b) => {
+                let valA = a[column];
+                let valB = b[column];
+                
+                if (direction === 'asc') {
+                    return valA > valB ? 1 : -1;
+                } else {
+                    return valA < valB ? 1 : -1;
+                }
+            });
+            renderTable(sortedData);
+        });
+    });
+
+    renderTable(responsibilityData);
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 80) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
